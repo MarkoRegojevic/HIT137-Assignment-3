@@ -7,6 +7,9 @@ class Tile:
         self.is_flipped_h = False
         self.is_flipped_v = False
 
+    def is_correct(self):
+        return self.current_pos == self.home_pos
+
 
 class PuzzleBoard:
     pass
