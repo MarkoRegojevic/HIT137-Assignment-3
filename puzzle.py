@@ -21,3 +21,8 @@ class PuzzleBoard:
         self.move_count = 0
         self.hints_remaining = 3
 
+    def load_tiles(self, tiles_list):
+        self.tiles = tiles_list
+        self.move_count = 0
+        self.hints_remaining = 3
+
