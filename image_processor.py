@@ -46,3 +46,41 @@ resized_image = cv2.resize(
 
 return resized_image
 
+
+# pads image so that the grid divides evenly
+# the image is maade square so rotated tiles still fit in the grid
+
+def pad_image(self, image, grid_size):
+
+    height, width = image. shape[0:2]
+
+    size = max(height, width)
+
+    remainder = size % grid_size
+
+    if remainder != 0:
+        size = size + (
+            grid_size - remainder
+        )
+
+    extra_width = size - width
+    extra_height = size - height
+
+    left=extra_width // 2
+    right=extra_width - left
+
+    top=extra_height // 2
+    bottom=extra_height - top
+
+    padded_image = cv2.copyMakeBorder(
+        image,
+        top,
+        bottom,
+        left,
+        right,
+        cv2.BORDER_CONSTANT,
+        value=(0, 0, 0)
+
+    )
+
+    return padded_image
