@@ -41,9 +41,7 @@ class PuzzleBoard:
         self.move_count += 1
 
     def rotate_tile(self, index):
-        self.tiles[index].rotation += 90
-        if self.tiles[index].rotation >= 360:
-            self.tiles[index].rotation -= 360
+        self.tiles[index].rotation = (self.tiles[index].rotation + 90) % 360
         self.move_count += 1
 
     def flip_tile(self, index, direction='h'):
@@ -56,15 +54,18 @@ class PuzzleBoard:
     def scramble(self):
         n = len(self.tiles)
         iterations = self.grid_size * (self.grid_size - 1)
-        for i in range(iterations):
-            action = i % 3
-            if action == 0:
-                i1, i2 = random.sample(range(n), 2)
-                self.swap_tiles(i1, i2)
-            elif action == 1:
-                self.rotate_tile(random.randrange(n))
-            else:
-                self.flip_tile(random.randrange(n), random.choice(['h', 'v']))
+        while True:
+            for i in range(iterations):
+                action = i % 3
+                if action == 0:
+                    i1, i2 = random.sample(range(n), 2)
+                    self.swap_tiles(i1, i2)
+                elif action == 1:
+                    self.rotate_tile(random.randrange(n))
+                else:
+                    self.flip_tile(random.randrange(n), random.choice(['h', 'v']))
+            if not self.is_solved():
+                break
         self.move_count = 0
 
     def get_incorrect_count(self):
