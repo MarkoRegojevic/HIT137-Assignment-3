@@ -15,5 +15,9 @@ class Tile:
 
 
 class PuzzleBoard:
-    pass
+    def __init__(self, grid_size):
+        self.grid_size = grid_size
+        self.tiles = []
+        self.move_count = 0
+        self.hints_remaining = 3
 
