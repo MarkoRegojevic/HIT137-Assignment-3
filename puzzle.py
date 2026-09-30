@@ -16,6 +16,9 @@ class Tile:
                 self.is_flipped_h == False and
                 self.is_flipped_v == False)
 
+    def get_transformed_image(self):
+        return self.image
+
 
 class PuzzleBoard:
     def __init__(self, grid_size):
