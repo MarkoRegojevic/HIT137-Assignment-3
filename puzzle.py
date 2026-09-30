@@ -26,3 +26,7 @@ class PuzzleBoard:
         self.move_count = 0
         self.hints_remaining = 3
 
+    def swap_tiles(self, index1, index2):
+        self.tiles[index1], self.tiles[index2] = self.tiles[index2], self.tiles[index1]
+        self.move_count += 1
+
