@@ -76,3 +76,13 @@ class PuzzleBoard:
                 self.hints_remaining -= 1
                 return (tile.current_pos, tile.home_pos)
         return None
+
+    def solve_puzzle(self):
+        self.tiles.sort(key=lambda tile: tile.home_pos)
+        for tile in self.tiles:
+            tile.current_pos = tile.home_pos
+            tile.rotation = 0
+            tile.is_flipped_h = False
+            tile.is_flipped_v = False
+        self.move_count = 0
+        self.hints_remaining = 3
