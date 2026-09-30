@@ -55,8 +55,8 @@ class PuzzleBoard:
         n = len(self.tiles)
         iterations = self.grid_size * (self.grid_size - 1)
         while True:
-            for i in range(iterations):
-                action = i % 3
+            for _ in range(iterations):
+                action = random.randint(0, 2)
                 if action == 0:
                     i1, i2 = random.sample(range(n), 2)
                     self.swap_tiles(i1, i2)
