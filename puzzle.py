@@ -1,5 +1,11 @@
 class Tile:
-    pass
+    def __init__(self, image, home_pos, current_pos):
+        self.image = image
+        self.home_pos = home_pos
+        self.current_pos = current_pos
+        self.rotation = 0
+        self.is_flipped_h = False
+        self.is_flipped_v = False
 
 
 class PuzzleBoard:
