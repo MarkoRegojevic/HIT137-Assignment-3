@@ -61,3 +61,9 @@ class PuzzleBoard:
             else:
                 self.flip_tile(random.randrange(n), random.choice(['h', 'v']))
         self.move_count = 0
+
+    def get_incorrect_count(self):
+        return sum(1 for tile in self.tiles if not tile.is_correct())
+
+    def is_solved(self):
+        return self.get_incorrect_count() == 0
