@@ -84,3 +84,4 @@ def pad_image(self, image, grid_size):
     )
 
     return padded_image
+
