@@ -67,3 +67,9 @@ class PuzzleBoard:
 
     def is_solved(self):
         return self.get_incorrect_count() == 0
+
+    def get_hint(self):
+        for tile in self.tiles:
+            if not tile.is_correct():
+                return (tile.current_pos, tile.home_pos)
+        return None
