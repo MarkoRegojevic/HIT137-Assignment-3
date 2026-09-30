@@ -32,3 +32,16 @@ class PuzzleBoard:
         self.tiles[index2].current_pos = index2
         self.move_count += 1
 
+    def rotate_tile(self, index):
+        self.tiles[index].rotation += 90
+        if self.tiles[index].rotation >= 360:
+            self.tiles[index].rotation -= 360
+        self.move_count += 1
+
+    def flip_tile(self, index, direction='h'):
+        if direction == 'h':
+            self.tiles[index].is_flipped_h = not self.tiles[index].is_flipped_h
+        else:
+            self.tiles[index].is_flipped_v = not self.tiles[index].is_flipped_v
+        self.move_count += 1
+
