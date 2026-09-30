@@ -1,3 +1,6 @@
+import random
+
+
 class Tile:
     def __init__(self, image, home_pos, current_pos):
         self.image = image
@@ -45,3 +48,15 @@ class PuzzleBoard:
             self.tiles[index].is_flipped_v = not self.tiles[index].is_flipped_v
         self.move_count += 1
 
+    def scramble(self):
+        n = len(self.tiles)
+        for _ in range(5):
+            action = random.randint(0, 2)
+            if action == 0:
+                i1, i2 = random.sample(range(n), 2)
+                self.swap_tiles(i1, i2)
+            elif action == 1:
+                self.rotate_tile(random.randrange(n))
+            else:
+                self.flip_tile(random.randrange(n), random.choice(['h', 'v']))
+        self.move_count = 0
