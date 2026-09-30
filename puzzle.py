@@ -11,10 +11,12 @@ class Tile:
         self.is_flipped_v = False
 
     def is_correct(self):
-        return (self.current_pos == self.home_pos and
-                self.rotation == 0 and
-                self.is_flipped_h == False and
-                self.is_flipped_v == False)
+        return (
+            self.current_pos == self.home_pos
+            and self.rotation == 0
+            and not self.is_flipped_h
+            and not self.is_flipped_v
+        )
 
     def get_transformed_image(self):
         return self.image
