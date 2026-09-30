@@ -8,7 +8,10 @@ class Tile:
         self.is_flipped_v = False
 
     def is_correct(self):
-        return self.current_pos == self.home_pos
+        return (self.current_pos == self.home_pos and
+                self.rotation == 0 and
+                self.is_flipped_h == False and
+                self.is_flipped_v == False)
 
 
 class PuzzleBoard:
