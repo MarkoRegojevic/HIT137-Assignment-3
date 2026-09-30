@@ -28,5 +28,7 @@ class PuzzleBoard:
 
     def swap_tiles(self, index1, index2):
         self.tiles[index1], self.tiles[index2] = self.tiles[index2], self.tiles[index1]
+        self.tiles[index1].current_pos = index1
+        self.tiles[index2].current_pos = index2
         self.move_count += 1
 
