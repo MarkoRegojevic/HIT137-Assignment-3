@@ -50,8 +50,9 @@ class PuzzleBoard:
 
     def scramble(self):
         n = len(self.tiles)
-        for _ in range(5):
-            action = random.randint(0, 2)
+        iterations = self.grid_size * (self.grid_size - 1)
+        for i in range(iterations):
+            action = i % 3
             if action == 0:
                 i1, i2 = random.sample(range(n), 2)
                 self.swap_tiles(i1, i2)
