@@ -71,3 +71,107 @@ def pad_image(self, image, grid_size):
     )
 
     return padded_image 
+
+# load, resize and pad image from file
+
+def prepare_image(self, file_path, grid_size):
+
+    if grid_size not in [3, 4, 5]:
+        raise ValueError(
+            "Grid size must be 3, 4 or 5"
+
+        )
+
+    image = self.load_image(
+        file_path
+    )
+
+    image= self.resize_image(
+        image
+    )
+
+    image= self.pad_image(
+        image,
+        grid_size
+    )
+
+    return image
+
+# split the image into tiles
+
+def split_image(self, image, grid_size):
+
+    tiles=[]
+
+    height, width = image.shape[0:2]
+
+    tile_height = (
+        height // grid_size
+    )
+
+    title_width = (
+        width // grid_size
+
+    )
+
+    for row in range(grid_size):
+
+        for column in range(grid_size):
+
+            y1 = row * tile_height
+            y2 = y1 + tile_height
+
+            x1 = column * title_width
+            x2 = x1 + title_width
+
+            title = image[
+                y1:y2
+                x1:x2
+
+            ].copy()
+
+            titles.append(title)
+
+    return tiles
+
+# reassemble tiles into one complete image
+
+def reassemble_image(
+        self,
+        titles,
+        grid_size
+    
+):
+
+    rows = []
+
+    for row in range(grind_size):
+
+        row_titles = []
+
+        for column in range(grid_size):
+
+            index = (
+                row * grid_size
+                + column
+            )
+
+            row_titles.append(
+                titles[index]
+            )
+
+        combined_row = cv2.hconcat(
+            row_tiles
+        )
+
+        rows.append(
+            combined_row
+        )
+
+    complete_image = cv2.vconcat(
+        rows
+    )
+
+    return complete_image
+
+
