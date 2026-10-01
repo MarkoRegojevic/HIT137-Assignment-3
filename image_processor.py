@@ -251,5 +251,12 @@ def flip_tile(
             0
         )
 
+    else:
+        flipped_tile = tile.copy()
+
+    return flipped_tile
+
+
+
     
 
