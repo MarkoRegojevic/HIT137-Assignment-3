@@ -193,5 +193,9 @@ def swap_titles(
 
     return tiles
 
+# rotate tile 90 degrees clockwise
+# angle can be 0, 90, 180, 270
+
+def rotate_tile
 
 
