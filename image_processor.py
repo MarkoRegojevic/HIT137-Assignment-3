@@ -174,4 +174,24 @@ def reassemble_image(
 
     return complete_image
 
+# swap two tiles in the list
+
+def swap_titles(
+    self,
+    tiles,
+    first_index,
+    second_index
+
+):
+
+    temp = tiles[first_index]
+    
+    tiles[first_index] = \
+        tiles[second_index]
+
+    tiles[second_index] = temp
+
+    return tiles
+
+
 
