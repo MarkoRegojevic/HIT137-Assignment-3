@@ -216,13 +216,24 @@ def rotate_tile(
             cv2.ROTATE_180
         )
 
+    elif angle == 270:
+
+        rotated_tile = cv2.rotate(
+            tile,
+            cv2.ROTATE_90_COUNTERCLOCKWISE
+        )
+
     else:
 
         rotated_tile = tile.copy()
 
     return rotated_tile
 
+# flip a tile
 
+def flip_tile(
+        self,
+)
 
 
 
