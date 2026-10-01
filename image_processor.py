@@ -196,6 +196,33 @@ def swap_titles(
 # rotate tile 90 degrees clockwise
 # angle can be 0, 90, 180, 270
 
-def rotate_tile
+def rotate_tile(
+        self,
+        tile,
+        angle
+):
+
+    if angle == 90:
+
+        rotated_tile = cv2.rotate(
+            tile,
+            cv2.ROTATE_90_CLOCKWISE
+        )
+
+    elif angle == 180:
+
+        rotated_tile == cv2.rotate(
+            tile,
+            cv2.ROTATE_180
+        )
+
+    else:
+
+        rotated_tile = tile.copy()
+
+    return rotated_tile
+
+
+
 
 
