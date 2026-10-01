@@ -233,7 +233,23 @@ def rotate_tile(
 
 def flip_tile(
         self,
-)
+        tile,
+        direction
+):
 
+    if direction == "horizontal":
 
+        flipped_tile = cv2.flip(
+            tile,
+            1
+        )
+
+    elif direction == "vertical":
+
+        flipped_tile = cv2.flip(
+            tile,
+            0
+        )
+
+    
 
