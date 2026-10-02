@@ -183,5 +183,4 @@ class PuzzleGUI:
         if file_path == "":
             return
         try:
-            size = self.grid_size.get()
-            
+            size = self.grid_size.get() 
