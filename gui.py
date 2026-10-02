@@ -84,7 +84,7 @@ class PuzzleGUI:
         )
         self.solve_button.grid(row=0, column=4, padx=5) 
 
-    #This block shows the score of the game, including moves and tiles left to solve
+    #  This block shows the score of the game, including moves and tiles left to solve
         score_frame = tk.Frame(self.window)
         score_frame.pack(pady=5)
 
@@ -105,8 +105,7 @@ class PuzzleGUI:
             text="Hints Used: 0 / 3"
         )
         self.hints_label.grid(row=0, column=2, padx=20) 
-
-# section where the two images go
+#   section where the two images go
         image_frame = tk.Frame(self.window)
         image_frame.pack(pady=10)
         original_text = tk.Label(
@@ -119,6 +118,8 @@ class PuzzleGUI:
             text="Puzzle Image"
         )
         puzzle_text.grid(row=0, column=1, padx=20)
+
+
 
 #Original image area 
         self.original_image_label = tk.Label(
@@ -134,7 +135,7 @@ class PuzzleGUI:
             pady=5
         )
 
-# The transformed image area 
+#The transformed image area 
         self.puzzle_label = tk.Label(
             image_frame, 
             text="Puzzle will appear here",
@@ -165,7 +166,7 @@ class PuzzleGUI:
             self.shift_left_click
         ) 
 
-# This part will let the user choose an image form thier computer and load it into the game 
+#This part will let the user choose an image form thier computer and load it into the game 
     def choose_image(self):
 
 
@@ -178,9 +179,34 @@ class PuzzleGUI:
                 ("BMP files", "*.bmp")
             ]
         )
-# If the cancel button is pressed 
+#If the cancel button is pressed 
     
         if file_path == "":
             return
         try:
             size = self.grid_size.get() 
+
+#Loads and prepares the image for the puzzle game 
+            image = self.image_processor.load_image(file_path)
+
+            if image is None:
+                messagebox.showerror(
+                    "Error",
+                    "The image could not be loaded."
+                )
+                return
+            image = self.image_processor.resize_image(image) 
+
+            image = self.image_processor.prepare_grid(
+                image,
+                size
+            )
+#Makes a new puzzle 
+            self.puzzle = Puzzle(
+                image,
+                size,
+                self.image_processor
+            )
+
+            self.puzzle.create_tiles()
+            self.puzzle.scramble()
