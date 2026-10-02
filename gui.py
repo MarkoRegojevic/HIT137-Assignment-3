@@ -148,3 +148,40 @@ class PuzzleGUI:
             padx=20,
             pady=5
         )
+#The mouse controls for the puzzle image, allowing the user to select and move tiles 
+
+        self.puzzle_label.bind(
+            "<Button-1>",
+            self.left_click
+        )
+
+        self.puzzle_label.bind(
+            "<Button-3>",
+            self.right_click
+        )
+
+        self.puzzle_label.bind(
+            "<Shift-Button-1>",
+            self.shift_left_click
+        ) 
+
+# This part will let the user choose an image form thier computer and load it into the game 
+    def choose_image(self):
+
+
+        file_path = filedialog.askopenfilename(
+            title="Choose an image",
+            filetypes=[
+                ("Image files", "*.jpg *.jpeg *.png *.bmp"),
+                ("JPEG files", "*.jpg *.jpeg"),
+                ("PNG files", "*.png"),
+                ("BMP files", "*.bmp")
+            ]
+        )
+# If the cancel button is pressed 
+    
+        if file_path == "":
+            return
+        try:
+            size = self.grid_size.get()
+            
