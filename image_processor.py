@@ -306,4 +306,8 @@ for row in range(
         1
     )
 
-return
+return image_with_grid
+
+# convert opencv bgr image to rgb because opencv uses bgr by default
+
+def
