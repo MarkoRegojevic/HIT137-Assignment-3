@@ -310,4 +310,16 @@ return image_with_grid
 
 # convert opencv bgr image to rgb because opencv uses bgr by default
 
-def
+def convert_to_rgb(
+        self,
+        image
+
+):
+
+    rgb_image = cv2.cvtColor(
+        image,
+        cv2.COLOR_BGR2RGB
+
+    )
+
+    return rgb_image
