@@ -256,6 +256,23 @@ def flip_tile(
 
     return flipped_tile
 
+# draw grind lines on the image
+
+def draw_grid(
+        self,
+        image,
+        grid_size
+
+):
+
+    image_with_grid = image.copy()
+
+    height, weight = \
+        image_with_grid.shape[0:2]
+
+    tile_width =(
+        height // grid_size
+    )
 
 
     
