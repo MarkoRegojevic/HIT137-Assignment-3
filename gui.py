@@ -33,3 +33,15 @@ class PuzzleGUI:
         self.game_finished = False
 
         self.create_widgets() 
+
+    # makes all of the buttons, labels and image areas
+    def create_widgets(self):
+
+        title_label = tk.Label(
+            self.window,
+            text="Image Puzzle Game",
+            font=("Arial", 18)
+        )
+        title_label.pack(pady=10)
+
+        
