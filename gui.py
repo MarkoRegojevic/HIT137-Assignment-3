@@ -134,4 +134,17 @@ class PuzzleGUI:
             pady=5
         )
 
-
+# The transformed image area 
+        self.puzzle_label = tk.Label(
+            image_frame, 
+            text="Puzzle will appear here",
+            width=50,
+            height=25,
+            relief="solid"
+        )
+        self.puzzle_label.grid(
+            row=1,
+            column=1,
+            padx=20,
+            pady=5
+        )
