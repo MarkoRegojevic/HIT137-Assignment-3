@@ -44,4 +44,42 @@ class PuzzleGUI:
         )
         title_label.pack(pady=10)
 
-        
+        # top section for buttons and grid size 
+        control_frame = tk.Frame(self.window)
+        control_frame.pack(pady=10)
+
+        load_button = tk.Button(
+            control_frame,
+            text="Load Image",
+            command=self.load_image
+        )
+        load_button.grid(row=0, column=0, padx=5)
+
+        grid_label = tk.Label(
+            control_frame,
+            text="Grid Size:"  
+        )
+        grid_label.grid(row=0, column=1, padx=5)
+
+        grid_menu = tk.OptionMenu(
+            control_frame,
+            self.grid_size,
+            3,
+            4,
+            5
+        )
+        grid_menu.grid(row=0, column=2, padx=5)
+
+        self.hit_button = tk.Button(
+            control_frame,
+            text="Hint",
+            command=self.use_hint,
+        )
+        self.hint_button.grid(row=0, column=3, padx=5)
+
+        self.solve_button = tk.Button(
+            control_frame,
+            text="Solve",
+            command=self.solve_puzzle
+        )
+
