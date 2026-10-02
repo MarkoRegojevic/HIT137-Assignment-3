@@ -82,4 +82,26 @@ class PuzzleGUI:
             text="Solve",
             command=self.solve_puzzle
         )
+        self.solve_button.grid(row=0, column=4, padx=5) 
 
+    #This block shows the score of the game, including moves and tiles left to solve
+        score_frame = tk.Frame(self.window)
+        score_frame.pack(pady=5)
+
+        self.moves_label = tk.Label(
+            score_frame,
+            text="Moves: 0"
+        )
+        self.moves_label.grid(row=0, column=0, padx=20)
+
+        self.tiles_label = tk.Label(
+            score_frame,
+            text="Tiles Incorrect: 0"
+        )
+        self.tiles_label.grid(row=0, column=1, padx=20)
+
+        self.hints_label = tk.Label(
+            score_frame,
+            text="Hints Used: 0 / 3"
+        )
+        self.hints_label.grid(row=0, column=2, padx=20) 
