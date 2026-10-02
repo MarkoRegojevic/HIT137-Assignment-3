@@ -105,3 +105,33 @@ class PuzzleGUI:
             text="Hints Used: 0 / 3"
         )
         self.hints_label.grid(row=0, column=2, padx=20) 
+
+# section where the two images go
+        image_frame = tk.Frame(self.window)
+        image_frame.pack(pady=10)
+        original_text = tk.Label(
+            image_frame,
+            text="Original Image"
+        )
+        original_text.grid(row=0, column=0, padx=20)
+        puzzle_text = tk.Label(
+            image_frame,
+            text="Puzzle Image"
+        )
+        puzzle_text.grid(row=0, column=1, padx=20)
+
+#Original image area 
+        self.original_image_label = tk.Label(
+            image_frame, 
+            text="Load and image" 
+            width=50, 
+            height=25,
+            relief="solid"
+        )
+        self.original_label.grid(
+            row=1
+            column=20
+            pady=5
+        )
+
+
