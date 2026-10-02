@@ -274,6 +274,20 @@ def draw_grid(
         height // grid_size
     )
 
+# vertical grid lines
+for column in range(
+    1,
+    grid_size
+)
 
-    
+    x = column * tile_width
+
+    cv2.line(
+        image_with_grid,
+        (x, 0),
+        (x, height),
+        (150, 150, 150),
+        1
+    )
+
 
