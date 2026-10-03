@@ -26,7 +26,7 @@ class PuzzleGUI:
         self.hint_home = None
         self.game_finished = False
         self.create_widgets()
-
+        
 #Makes all of the buttons, labels and image areas
     def create_widgets(self):
         tk.Label(
@@ -139,7 +139,6 @@ class PuzzleGUI:
 
         if file_path == "":
             return
-
         try:
             size = self.grid_size.get()
 
@@ -213,17 +212,14 @@ class PuzzleGUI:
                 )
 
             puzzle_tiles.append(tile_image)
-
         puzzle_image = self.image_processor.reassemble_image(
             puzzle_tiles,
             self.grid_size.get()
         )
-
         puzzle_image = self.image_processor.draw_grid(
             puzzle_image,
             self.grid_size.get()
         )
-
         for tile in self.puzzle.tiles:
             if tile.is_correct():
                 self.draw_tick(
@@ -266,12 +262,10 @@ class PuzzleGUI:
         image = self.image_processor.convert_to_rgb(image)
         image = Image.fromarray(image)
         photo = ImageTk.PhotoImage(image)
-
         label.config(
             image=photo,
             text=""
         )
-
         if image_type == "original":
             self.original_photo = photo
         else:
@@ -280,24 +274,68 @@ class PuzzleGUI:
     def get_clicked_tile(self, event):
         if self.puzzle is None:
             return None
-
         height, width = self.original_image.shape[:2]
-
         if event.x < 0 or event.y < 0:
             return None
-
         if event.x >= width or event.y >= height:
             return None
-
         size = self.grid_size.get()
-
         tile_width = width // size
         tile_height = height // size
-
         column = event.x // tile_width
         row = event.y // tile_height
-
         return row, column 
+
+#converts the columnn and row int a index 
+    def tile_to_index(self, tile):
+        row, column = tile
+
+        return (
+            row * self.grid_size.get()
+            + column
+        )
+
+#This block will select or swaps tiles
+    def left_click(self, event):
+        if self.puzzle is None or self.game_finished:
+            return
+        tile = self.get_clicked_tile(event)
+        if tile is None:
+            return
+        if self.selected_tile is None:
+            self.selected_tile = tile
+            self.update_images()
+            return
+        if self.selected_tile == tile:
+            self.selected_tile = None
+            self.update_images()
+            return
+        first = self.tile_to_index(
+            self.selected_tile
+        )
+
+        second = self.tile_to_index(tile)
+        self.puzzle.swap_tiles(
+            first,
+            second
+        )
+        self.selected_tile = None
+        self.move_made()
+    # rotates tile
+    def right_click(self, event):
+        if self.puzzle is None or self.game_finished:
+            return
+
+        tile = self.get_clicked_tile(event)
+
+        if tile is None:
+            return
+
+        self.puzzle.rotate_tile(
+            self.tile_to_index(tile)
+        )
+
+        self.move_made() 
 
 #Updates both images shown on the screen
     def update_images(self):
