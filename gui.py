@@ -434,16 +434,19 @@ class PuzzleGUI:
             "Solved",
             "The puzzle has been solved."
         )
+
 #Checks if the player completed the puzzle and ends the game if they have 
     def check_finished(self):
-        if self.puzzle is None:
-            return
         if self.puzzle.is_solved():
             self.game_finished = True
+
+            self.hint_button.config(state="disabled")
+            self.solve_button.config(state="disabled")
+
             messagebox.showinfo(
                 "Congratulations",
                 "You have solved the puzzle!"
-            )
+            ) 
 #Activate the tinker program 
     def run(self):
         self.window.mainloop()
