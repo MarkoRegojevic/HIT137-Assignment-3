@@ -243,5 +243,17 @@ class PuzzleGUI:
 
         self.show_original_image(original_image)
         self.show_puzzle_image(puzzle_image)
+ #Shows the original image on the left
+    def show_original_image(self, image):
+
+        image = self.convert_image(image)
+
+        self.original_photo = ImageTk.PhotoImage(image)
+
+        self.original_label.config(
+            image=self.original_photo,
+            text=""
+        )
+        
 
 
