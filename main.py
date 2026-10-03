@@ -1,17 +1,16 @@
-# Image Puzzle Game
+#Image Puzzle Game
 
-# gets the GUI class from the gui file
+#Gets the GUI class from the gui file
 from gui import PuzzleGUI
 
-# this function starts the puzzle program
+#This function starts the puzzle program
 def main():
 
-    # makes the main puzzle window
+#Makes the main puzzle window
     app = PuzzleGUI()
 
-    # starts the program
+    #Starts the program
     app.run()
-
-# runs the program
+#Runs the program
 if __name__ == "__main__":
     main() 
