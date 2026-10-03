@@ -386,5 +386,23 @@ class PuzzleGUI:
                 "Hint",
                 "There are no incorrect tiles."
             )
+#Solves the puzzle and ends the game 
+    def solve_puzzle(self):
 
-            
+        if self.puzzle is None:
+            return
+
+        self.puzzle.solve()
+
+        self.moves = 0
+        self.selected_tile = None
+        self.game_finished = True
+
+        self.update_images()
+        self.update_score()
+
+        messagebox.showinfo(
+            "Solved",
+            "The puzzle has been solved."
+        )
+
