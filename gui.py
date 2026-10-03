@@ -265,6 +265,14 @@ class PuzzleGUI:
             image=self.puzzle_photo,
             text=""
         )
-        
+#Changes an opencv image so tkinter can display it
+    def convert_image(self, image):
+
+        image = self.image_processor.convert_to_rgb(image)
+
+        image = Image.fromarray(image)
+
+        return image 
+    
 
 
