@@ -300,6 +300,16 @@ class PuzzleGUI:
         tile = self.get_clicked_tile(event)
         if tile is None:
             return
+
+        if self.selected_tile is None:
+            self.selected_tile = tile
+            self.update_images()
+            return
+        if self.selected_tile == tile:
+            self.selected_tile = None
+            self.update_images()
+            return
+        
         
 
 
