@@ -330,4 +330,14 @@ class PuzzleGUI:
 
         self.puzzle.rotate_tile(tile)
         self.move_made() 
-        
+
+#Shift and left clikc flips a tile 
+    def shift_left_click(self, event):
+        if self.puzzle is None or self.game_finished:
+            return
+        tile = self.get_clicked_tile(event)
+        if tile is None:
+            return
+
+        self.puzzle.flip_tile(tile)
+        self.move_made()
