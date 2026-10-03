@@ -483,9 +483,26 @@ class PuzzleGUI:
             (0, 255, 0),
             3
         )
-
-
-
+#Part where the blue hint circle will pop up when the hint button is pressed by the player 
+    def draw_hint(self, image, index):
+        height, width = image.shape[:2]
+        size = self.grid_size.get()
+        tile_width = width // size
+        tile_height = height // size
+        row = index // size
+        column = index % size
+        centre = (
+            column * tile_width + tile_width // 2,
+            row * tile_height + tile_height // 2
+        )
+        cv2.circle(
+            image,
+            centre,
+            min(tile_width, tile_height) // 5,
+            (255, 0, 0),
+            3
+        )
+        
 #Activate the tinker program 
     def run(self):
         self.window.mainloop()
