@@ -273,6 +273,28 @@ class PuzzleGUI:
         image = Image.fromarray(image)
 
         return image 
-    
+#Works out which tile was clicked 
+    def get_clicked_tile(self, event):
+
+        if self.puzzle is None:
+            return None
+
+        image_width = self.puzzle.get_width()
+        image_height = self.puzzle.get_height()
+
+        # ignores clicks outside the image
+        if event.x < 0 or event.y < 0:
+            return None
+
+        if event.x >= image_width or event.y >= image_height:
+            return None
+
+        tile_width = image_width // self.grid_size.get()
+        tile_height = image_height // self.grid_size.get()
+
+        column = event.x // tile_width
+        row = event.y // tile_height
+
+        return row, column
 
 
