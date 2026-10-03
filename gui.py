@@ -276,7 +276,28 @@ class PuzzleGUI:
             self.original_photo = photo
         else:
             self.puzzle_photo = photo 
+#Works out which tile was clicked 
+    def get_clicked_tile(self, event):
+        if self.puzzle is None:
+            return None
 
+        height, width = self.original_image.shape[:2]
+
+        if event.x < 0 or event.y < 0:
+            return None
+
+        if event.x >= width or event.y >= height:
+            return None
+
+        size = self.grid_size.get()
+
+        tile_width = width // size
+        tile_height = height // size
+
+        column = event.x // tile_width
+        row = event.y // tile_height
+
+        return row, column 
 
 #Updates both images shown on the screen
     def update_images(self):
