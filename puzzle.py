@@ -92,6 +92,3 @@ class PuzzleBoard:
             tile.is_flipped_v = False
         self.move_count = 0
         self.hints_remaining = 3
-        
-
-
