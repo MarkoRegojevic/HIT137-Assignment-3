@@ -8,30 +8,23 @@ from PIL import Image, ImageTk
 from image_processor import ImageProcessor  
 
 class PuzzleGUI:
-
     def __init__(self):
         self.window = tk.Tk()
         self.window.title("Image Puzzle Game")
         self.window.geometry("1100x700")
-
         self.image_processor = ImageProcessor()
-
         self.puzzle = None
         self.original_image = None
         self.original_photo = None
         self.puzzle_photo = None
-
         self.grid_size = tk.IntVar(value=3)
-
         self.moves = 0
         self.tiles_left = 0
         self.hints_used = 0
-
         self.selected_tile = None
         self.hint_current = None
         self.hint_home = None
         self.game_finished = False
-
         self.create_widgets()
 
 #Makes all of the buttons, labels and image areas
@@ -41,10 +34,8 @@ class PuzzleGUI:
             text="Image Puzzle Game",
             font=("Arial", 18)
         ).pack(pady=10)
-
         controls = tk.Frame(self.window)
         controls.pack(pady=10)
-
         tk.Button(
             controls,
             text="Load Image",
@@ -55,13 +46,11 @@ class PuzzleGUI:
             controls,
             text="Grid Size:"
         ).grid(row=0, column=1, padx=5)
-
         tk.OptionMenu(
             controls,
             self.grid_size,
             3, 4, 5
         ).grid(row=0, column=2, padx=5)
-
         self.hint_button = tk.Button(
             controls,
             text="Hint",
@@ -83,7 +72,6 @@ class PuzzleGUI:
 
         self.moves_label = tk.Label(score_frame, text="Moves: 0")
         self.moves_label.grid(row=0, column=0, padx=20)
-
         self.tiles_label = tk.Label(
             score_frame,
             text="Tiles Incorrect: 0"
@@ -159,21 +147,17 @@ class PuzzleGUI:
                 file_path,
                 size
             )
-
             self.original_image = image.copy()
 
             tile_images = self.image_processor.split_image(
                 image,
                 size
             )
-
             tiles = []
-
             for i in range(len(tile_images)):
                 tiles.append(
                     Tile(tile_images[i], i, i)
                 )
-
             self.puzzle = PuzzleBoard(size)
             self.puzzle.load_tiles(tiles)
             self.puzzle.scramble()
@@ -192,16 +176,92 @@ class PuzzleGUI:
 
             self.update_images()
             self.update_score()
-
         except Exception as error:
             print(error)
-
             messagebox.showerror(
                 "Error",
                 "There was a problem loading the image."
             ) 
+            
+#This will update the original and puzzle images 
+    def update_images(self):
+        if self.puzzle is None:
+            return
 
-    
+        original_image = self.original_image.copy()
+        puzzle_tiles = []
+
+        for tile in self.puzzle.tiles:
+            tile_image = tile.image.copy()
+
+            if tile.is_flipped_h:
+                tile_image = self.image_processor.flip_tile(
+                    tile_image,
+                    "horizontal"
+                )
+
+            if tile.is_flipped_v:
+                tile_image = self.image_processor.flip_tile(
+                    tile_image,
+                    "vertical"
+                )
+
+            if tile.rotation != 0:
+                tile_image = self.image_processor.rotate_tile(
+                    tile_image,
+                    tile.rotation
+                )
+
+            puzzle_tiles.append(tile_image)
+
+        puzzle_image = self.image_processor.reassemble_image(
+            puzzle_tiles,
+            self.grid_size.get()
+        )
+
+        puzzle_image = self.image_processor.draw_grid(
+            puzzle_image,
+            self.grid_size.get()
+        )
+
+        for tile in self.puzzle.tiles:
+            if tile.is_correct():
+                self.draw_tick(
+                    puzzle_image,
+                    tile.current_pos
+                )
+
+        if self.selected_tile is not None:
+            index = self.tile_to_index(
+                self.selected_tile
+            )
+            self.draw_selection(
+                puzzle_image,
+                index
+            )
+
+        if self.hint_current is not None:
+            self.draw_hint(
+                puzzle_image,
+                self.hint_current
+            )
+            self.draw_hint(
+                original_image,
+                self.hint_home
+            )
+
+        self.show_image(
+            original_image,
+            self.original_image_label,
+            "original"
+        )
+
+        self.show_image(
+            puzzle_image,
+            self.puzzle_label,
+            "puzzle"
+        ) 
+#This will display 
 #If the cancel button is pressed 
         if file_path == "":
             return
