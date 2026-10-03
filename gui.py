@@ -407,8 +407,6 @@ class PuzzleGUI:
         self.update_images()
         self.update_score()
 
-
-    
 #Solves the puzzle and ends the game 
     def solve_puzzle(self):
         if self.puzzle is None or self.game_finished:
@@ -440,8 +438,26 @@ class PuzzleGUI:
                 "Congratulations",
                 "You have solved the puzzle!"
             ) 
+#It will draw  border around selected tile 
+    def draw_selection(self, image, index):
+        height, width = image.shape[:2]
+        size = self.grid_size.get()
+        tile_width = width // size
+        tile_height = height // size
+        row = index // size
+        column = index % size
 
-
+        x1 = column * tile_width
+        y1 = row * tile_height
+        x2 = x1 + tile_width - 1
+        y2 = y1 + tile_height - 1
+        cv2.rectangle(
+            image,
+            (x1, y1),
+            (x2, y2),
+            (0, 255, 255),
+            3
+        )
 
 
 
