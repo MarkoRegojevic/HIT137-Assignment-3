@@ -26,7 +26,7 @@ class PuzzleGUI:
         self.hint_home = None
         self.game_finished = False
         self.create_widgets()
-        
+
 #Makes all of the buttons, labels and image areas
     def create_widgets(self):
         tk.Label(
@@ -321,7 +321,7 @@ class PuzzleGUI:
         )
         self.selected_tile = None
         self.move_made()
-    # rotates tile
+#THis function will rotate tiles when pressed 
     def right_click(self, event):
         if self.puzzle is None or self.game_finished:
             return
