@@ -221,7 +221,6 @@ class PuzzleGUI:
 
             self.update_images()
             self.update_score()
-
         except Exception:
 
             messagebox.showerror(
@@ -240,7 +239,6 @@ class PuzzleGUI:
         puzzle_image = self.puzzle.get_display_image(
             self.selected_tile
         )
-
         self.show_original_image(original_image)
         self.show_puzzle_image(puzzle_image)
  #Shows the original image on the left
@@ -271,18 +269,17 @@ class PuzzleGUI:
         image = self.image_processor.convert_to_rgb(image)
 
         image = Image.fromarray(image)
-
         return image 
+
+    
 #Works out which tile was clicked 
     def get_clicked_tile(self, event):
-
         if self.puzzle is None:
             return None
-
         image_width = self.puzzle.get_width()
         image_height = self.puzzle.get_height()
 
-        # ignores clicks outside the image
+
         if event.x < 0 or event.y < 0:
             return None
 
@@ -296,5 +293,13 @@ class PuzzleGUI:
         row = event.y // tile_height
 
         return row, column
+ #Left lcikc slects a title or swaps tiles 
+    def left_click(self, event):
+        if self.puzzle is None or self.game_finished:
+            return
+        tile = self.get_clicked_tile(event)
+        if tile is None:
+            return
+        
 
 
