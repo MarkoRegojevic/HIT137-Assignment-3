@@ -319,6 +319,15 @@ class PuzzleGUI:
         self.selected_tile = None
         self.move_made()
 
+
+#Right click rotates a tile 
+    def right_click(self, event):
+        if self.puzzle is None or self.game_finished:
+            return
+        tile = self.get_clicked_tile(event)
+        if tile is None:
+            return
+
+        self.puzzle.rotate_tile(tile)
+        self.move_made() 
         
-
-
