@@ -459,6 +459,31 @@ class PuzzleGUI:
             3
         )
 
+#This part will draw the green tick on the tile thjat is correctly selected 
+    def draw_tick(self, image, index):
+        height, width = image.shape[:2]
+        size = self.grid_size.get()
+        tile_width = width // size
+        tile_height = height // size
+        row = index // size
+        column = index % size
+        x = column * tile_width
+        y = row * tile_height
+        cv2.line(
+            image,
+            (x + 8, y + 18),
+            (x + 14, y + 24),
+            (0, 255, 0),
+            3
+        )
+        cv2.line(
+            image,
+            (x + 14, y + 24),
+            (x + 27, y + 9),
+            (0, 255, 0),
+            3
+        )
+
 
 
 #Activate the tinker program 
