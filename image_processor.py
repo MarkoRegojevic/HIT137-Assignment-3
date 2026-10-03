@@ -127,7 +127,6 @@ def split_image(self, image, grid_size):
             title = image[
                 y1:y2
                 x1:x2
-
             ].copy()
 
             titles.append(title)

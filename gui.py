@@ -1,18 +1,18 @@
 # gui for the image puzzle game 
 
 import tkinter as tk
-from tinker import filedialog
-from tinker import messagebox 
+from tkinter import filedialog
+from tkinter import messagebox 
 
-from PTL import Puzzle
-from image_processing import ImageProcessing 
+from PIL import Image, ImageTk 
+from image_processor import ImageProcessor  
 
 class PuzzleGUI:
     def __init__(self):
 #This will make the main window for the puzzle game 
         self.window = tk.Tk() 
-        self.windown.title("Image Puzzle Game")
-        self.windown.gemometry("1100x700")
+        self.window.title("Image Puzzle Game")
+        self.window.geometry("1100x700")
 
         self.image_processor = ImageProcessor() 
 
@@ -21,14 +21,14 @@ class PuzzleGUI:
         self.original_photo = None 
         self.puzzle_photo = None 
 
-        self.grid_szie = tk.IntVar() 
+        self.grid_size = tk.IntVar() 
         self.grid_size.set(3)
 
         self.moves = 0
-        self.titles_left = 0 
+        self.tiles_left = 0 
         self.hints_used = 0 
 
-        self.selected_title = None
+        self.selected_tile = None
 
         self.game_finished = False
 
@@ -51,7 +51,7 @@ class PuzzleGUI:
         load_button = tk.Button(
             control_frame,
             text="Load Image",
-            command=self.load_image
+            command=self.choose_image
         )
         load_button.grid(row=0, column=0, padx=5)
 
@@ -70,7 +70,7 @@ class PuzzleGUI:
         )
         grid_menu.grid(row=0, column=2, padx=5)
 
-        self.hit_button = tk.Button(
+        self.hint_button = tk.Button(
             control_frame,
             text="Hint",
             command=self.use_hint,
@@ -121,14 +121,14 @@ class PuzzleGUI:
 
         self.original_image_label = tk.Label(
             image_frame, 
-            text="Load and image" 
+            text="Load and image",
             width=50, 
             height=25,
             relief="solid"
         )
-        self.original_label.grid(
-            row=1
-            column=20
+        self.original_image_label.grid(
+            row=1,
+            column=0,
             pady=5
         )
 #The transformed image area is shown here, where the user can click on tiles to move them around 
@@ -209,6 +209,7 @@ class PuzzleGUI:
             self.game_finished = False
 
             self.hint_button.config(state="normal")
+            self.solve_button.config(state="normal") 
             self.update_images()
             self.update_score()
         except Exception:
@@ -235,7 +236,7 @@ class PuzzleGUI:
         image = self.convert_image(image)
         self.original_photo = ImageTk.PhotoImage(image)
 
-        self.original_label.config(
+        self.original_image_label.config(
             image=self.original_photo,
             text=""
         )
@@ -325,33 +326,33 @@ class PuzzleGUI:
 #Runs after the user has made a move. 
     def move_made(self): 
         self.moves += 1 
-        self.puzle.clear_hint()
+        self.puzzle.clear_hint()
         self.update_images()
         self.update_score()
         self.check_finished() 
 
-        def update_score(self):
-            if self.puzzle is None:
-                self.tiles_left = 0
+    def update_score(self):
+        if self.puzzle is None:
+            self.tiles_left = 0
 
-            else: 
-                self.tiles_left = self.puzzle.count_incorrect_tiles()
+        else: 
+            self.tiles_left = self.puzzle.count_incorrect_tiles()
 
-            self.moves_label.config(
-                text="Moves: " + str(self.moves)
-            )
-            self.tiles_label.config(
-                text="Tiles Incorrect: " + str(self.tiles_left)
-            )
-            self.hints_label.config(
-                text="Hints Used: " + str(self.hints_used) + " / 3" 
-            )
+        self.moves_label.config(
+            text="Moves: " + str(self.moves)
+        )
+        self.tiles_label.config(
+            text="Tiles Incorrect: " + str(self.tiles_left)
+        )
+        self.hints_label.config(
+            text="Hints Used: " + str(self.hints_used) + " / 3" 
+        )
 #it will give the player a hint if they have not used all of their hints 
     def use_hint(self):
         if self.puzzle is None or self.game_finished:
             return
         if self.hints_used >= 3: 
-            self,hint_button.config(state="disabled") 
+            self.hint_button.config(state="disabled") 
             return
         hint_found = self.puzzle.make_hint() 
         if hint_found:
@@ -372,7 +373,7 @@ class PuzzleGUI:
         if self.puzzle is None:
             return
 
-        self.puzzle.solve()
+        self.puzzle.solve_puzzle() 
 
         self.moves = 0
         self.selected_tile = None
