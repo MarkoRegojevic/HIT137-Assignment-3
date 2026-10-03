@@ -341,3 +341,30 @@ class PuzzleGUI:
 
         self.puzzle.flip_tile(tile)
         self.move_made()
+
+#Runs after the user has made a move. 
+    def move_made(self): 
+        self.moves += 1 
+        self.puzle.clear_hint()
+        self.update_images()
+        self.update_score()
+        self.check_finished() 
+
+        def update_score(self):
+            if self.puzzle is None:
+                self.tiles_left = 0
+
+            else: 
+                self.tiles_left = self.puzzle.count_incorrect_tiles()
+
+            self.moves_label.config(
+                text="Moves: " + str(self.moves)
+            )
+            self.tiles_label.config(
+                text="Tiles Incorrect: " + str(self.tiles_left)
+            )
+            self.hints_label.config(
+                text="Hints Used: " + str(self.hints_used) + " / 3" 
+            )
+
+            
