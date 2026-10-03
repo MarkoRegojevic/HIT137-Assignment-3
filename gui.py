@@ -210,3 +210,23 @@ class PuzzleGUI:
 
             self.puzzle.create_tiles()
             self.puzzle.scramble()
+
+# resets everything for the new image
+            self.moves = 0
+            self.hints_used = 0
+            self.selected_tile = None
+            self.game_finished = False
+
+            self.hint_button.config(state="normal")
+
+            self.update_images()
+            self.update_score()
+
+        except Exception:
+
+            messagebox.showerror(
+                "Error",
+                "There was a problem loading the image."
+            )
+
+            
