@@ -502,7 +502,7 @@ class PuzzleGUI:
             (255, 0, 0),
             3
         )
-        
+
 #Activate the tinker program 
     def run(self):
-        self.window.mainloop()
+        self.window.mainloop() 
