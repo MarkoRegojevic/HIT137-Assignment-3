@@ -254,6 +254,17 @@ class PuzzleGUI:
             image=self.original_photo,
             text=""
         )
+#mShows the puzzle image on the right
+    def show_puzzle_image(self, image):
+
+        image = self.convert_image(image)
+
+        self.puzzle_photo = ImageTk.PhotoImage(image)
+
+        self.puzzle_label.config(
+            image=self.puzzle_photo,
+            text=""
+        )
         
 
 
