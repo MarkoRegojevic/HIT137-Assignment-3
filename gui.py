@@ -8,31 +8,31 @@ from PIL import Image, ImageTk
 from image_processor import ImageProcessor  
 
 class PuzzleGUI:
+
     def __init__(self):
-#This will make the main window for the puzzle game 
-        self.window = tk.Tk() 
+        self.window = tk.Tk()
         self.window.title("Image Puzzle Game")
         self.window.geometry("1100x700")
 
-        self.image_processor = ImageProcessor() 
+        self.image_processor = ImageProcessor()
 
-        self.puzzle = None 
+        self.puzzle = None
+        self.original_image = None
+        self.original_photo = None
+        self.puzzle_photo = None
 
-        self.original_photo = None 
-        self.puzzle_photo = None 
-
-        self.grid_size = tk.IntVar() 
-        self.grid_size.set(3)
+        self.grid_size = tk.IntVar(value=3)
 
         self.moves = 0
-        self.tiles_left = 0 
-        self.hints_used = 0 
+        self.tiles_left = 0
+        self.hints_used = 0
 
         self.selected_tile = None
-
+        self.hint_current = None
+        self.hint_home = None
         self.game_finished = False
 
-        self.create_widgets() 
+        self.create_widgets()
 
 #Makes all of the buttons, labels and image areas
     def create_widgets(self):
