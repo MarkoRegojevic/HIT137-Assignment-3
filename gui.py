@@ -9,7 +9,7 @@ from image_processing import ImageProcessing
 
 class PuzzleGUI:
     def __init__(self):
-        #this will make the main window for the puzzle game 
+#This will make the main window for the puzzle game 
         self.window = tk.Tk() 
         self.windown.title("Image Puzzle Game")
         self.windown.gemometry("1100x700")
@@ -34,7 +34,7 @@ class PuzzleGUI:
 
         self.create_widgets() 
 
-    # makes all of the buttons, labels and image areas
+#Makes all of the buttons, labels and image areas
     def create_widgets(self):
 
         title_label = tk.Label(
@@ -44,7 +44,7 @@ class PuzzleGUI:
         )
         title_label.pack(pady=10)
 
-        # top section for buttons and grid size 
+    #Top section for buttons and grid size 
         control_frame = tk.Frame(self.window)
         control_frame.pack(pady=10)
 
@@ -84,7 +84,7 @@ class PuzzleGUI:
         )
         self.solve_button.grid(row=0, column=4, padx=5) 
 
-    #  This block shows the score of the game, including moves and tiles left to solve
+    # This block shows the score of the game, including moves and tiles left to solve
         score_frame = tk.Frame(self.window)
         score_frame.pack(pady=5)
 
@@ -105,7 +105,7 @@ class PuzzleGUI:
             text="Hints Used: 0 / 3"
         )
         self.hints_label.grid(row=0, column=2, padx=20) 
-#   section where the two images go
+#This is thesection where the two images go
         image_frame = tk.Frame(self.window)
         image_frame.pack(pady=10)
         original_text = tk.Label(
@@ -119,9 +119,6 @@ class PuzzleGUI:
         )
         puzzle_text.grid(row=0, column=1, padx=20)
 
-
-
-#Original image area 
         self.original_image_label = tk.Label(
             image_frame, 
             text="Load and image" 
@@ -134,8 +131,7 @@ class PuzzleGUI:
             column=20
             pady=5
         )
-
-#The transformed image area 
+#The transformed image area is shown here, where the user can click on tiles to move them around 
         self.puzzle_label = tk.Label(
             image_frame, 
             text="Puzzle will appear here",
@@ -168,8 +164,6 @@ class PuzzleGUI:
 
 #This part will let the user choose an image form thier computer and load it into the game 
     def choose_image(self):
-
-
         file_path = filedialog.askopenfilename(
             title="Choose an image",
             filetypes=[
@@ -180,7 +174,6 @@ class PuzzleGUI:
             ]
         )
 #If the cancel button is pressed 
-    
         if file_path == "":
             return
         try:
@@ -196,7 +189,6 @@ class PuzzleGUI:
                 )
                 return
             image = self.image_processor.resize_image(image) 
-
             image = self.image_processor.prepare_grid(
                 image,
                 size
@@ -207,7 +199,6 @@ class PuzzleGUI:
                 size,
                 self.image_processor
             )
-
             self.puzzle.create_tiles()
             self.puzzle.scramble()
 
@@ -218,7 +209,6 @@ class PuzzleGUI:
             self.game_finished = False
 
             self.hint_button.config(state="normal")
-
             self.update_images()
             self.update_score()
         except Exception:
@@ -233,7 +223,6 @@ class PuzzleGUI:
 
         if self.puzzle is None:
             return
-
         original_image = self.puzzle.get_original_image()
 
         puzzle_image = self.puzzle.get_display_image(
@@ -243,9 +232,7 @@ class PuzzleGUI:
         self.show_puzzle_image(puzzle_image)
  #Shows the original image on the left
     def show_original_image(self, image):
-
         image = self.convert_image(image)
-
         self.original_photo = ImageTk.PhotoImage(image)
 
         self.original_label.config(
@@ -278,14 +265,11 @@ class PuzzleGUI:
             return None
         image_width = self.puzzle.get_width()
         image_height = self.puzzle.get_height()
-
-
         if event.x < 0 or event.y < 0:
             return None
 
         if event.x >= image_width or event.y >= image_height:
             return None
-
         tile_width = image_width // self.grid_size.get()
         tile_height = image_height // self.grid_size.get()
 
@@ -310,15 +294,12 @@ class PuzzleGUI:
             self.selected_tile = None
             self.update_images()
             return
-
         self.puzzle.swap_tiles(
             self.selected_tile,
             tile           
         )
-
         self.selected_tile = None
         self.move_made()
-
 
 #Right click rotates a tile 
     def right_click(self, event):
@@ -338,7 +319,6 @@ class PuzzleGUI:
         tile = self.get_clicked_tile(event)
         if tile is None:
             return
-
         self.puzzle.flip_tile(tile)
         self.move_made()
 
@@ -397,7 +377,6 @@ class PuzzleGUI:
         self.moves = 0
         self.selected_tile = None
         self.game_finished = True
-
         self.update_images()
         self.update_score()
 
