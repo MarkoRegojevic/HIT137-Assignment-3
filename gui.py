@@ -36,62 +36,52 @@ class PuzzleGUI:
 
 #Makes all of the buttons, labels and image areas
     def create_widgets(self):
-
-        title_label = tk.Label(
+        tk.Label(
             self.window,
             text="Image Puzzle Game",
             font=("Arial", 18)
-        )
-        title_label.pack(pady=10)
+        ).pack(pady=10)
 
-    #Top section for buttons and grid size 
-        control_frame = tk.Frame(self.window)
-        control_frame.pack(pady=10)
+        controls = tk.Frame(self.window)
+        controls.pack(pady=10)
 
-        load_button = tk.Button(
-            control_frame,
+        tk.Button(
+            controls,
             text="Load Image",
             command=self.choose_image
-        )
-        load_button.grid(row=0, column=0, padx=5)
+        ).grid(row=0, column=0, padx=5)
 
-        grid_label = tk.Label(
-            control_frame,
-            text="Grid Size:"  
-        )
-        grid_label.grid(row=0, column=1, padx=5)
+        tk.Label(
+            controls,
+            text="Grid Size:"
+        ).grid(row=0, column=1, padx=5)
 
-        grid_menu = tk.OptionMenu(
-            control_frame,
+        tk.OptionMenu(
+            controls,
             self.grid_size,
-            3,
-            4,
-            5
-        )
-        grid_menu.grid(row=0, column=2, padx=5)
+            3, 4, 5
+        ).grid(row=0, column=2, padx=5)
 
         self.hint_button = tk.Button(
-            control_frame,
+            controls,
             text="Hint",
             command=self.use_hint,
+            state="disabled"
         )
         self.hint_button.grid(row=0, column=3, padx=5)
 
         self.solve_button = tk.Button(
-            control_frame,
+            controls,
             text="Solve",
-            command=self.solve_puzzle
+            command=self.solve_puzzle,
+            state="disabled"
         )
-        self.solve_button.grid(row=0, column=4, padx=5) 
+        self.solve_button.grid(row=0, column=4, padx=5)
 
-    # This block shows the score of the game, including moves and tiles left to solve
         score_frame = tk.Frame(self.window)
         score_frame.pack(pady=5)
 
-        self.moves_label = tk.Label(
-            score_frame,
-            text="Moves: 0"
-        )
+        self.moves_label = tk.Label(score_frame, text="Moves: 0")
         self.moves_label.grid(row=0, column=0, padx=20)
 
         self.tiles_label = tk.Label(
@@ -104,39 +94,36 @@ class PuzzleGUI:
             score_frame,
             text="Hints Used: 0 / 3"
         )
-        self.hints_label.grid(row=0, column=2, padx=20) 
-#This is thesection where the two images go
+        self.hints_label.grid(row=0, column=2, padx=20)
+
         image_frame = tk.Frame(self.window)
         image_frame.pack(pady=10)
-        original_text = tk.Label(
+
+        tk.Label(
             image_frame,
             text="Original Image"
-        )
-        original_text.grid(row=0, column=0, padx=20)
-        puzzle_text = tk.Label(
+        ).grid(row=0, column=0, padx=20)
+
+        tk.Label(
             image_frame,
             text="Puzzle Image"
-        )
-        puzzle_text.grid(row=0, column=1, padx=20)
+        ).grid(row=0, column=1, padx=20)
 
         self.original_image_label = tk.Label(
-            image_frame, 
-            text="Load and image",
-            width=50, 
-            height=25,
+            image_frame,
+            text="Load an image",
             relief="solid"
         )
         self.original_image_label.grid(
             row=1,
             column=0,
+            padx=20,
             pady=5
         )
-#The transformed image area is shown here, where the user can click on tiles to move them around 
+
         self.puzzle_label = tk.Label(
-            image_frame, 
+            image_frame,
             text="Puzzle will appear here",
-            width=50,
-            height=25,
             relief="solid"
         )
         self.puzzle_label.grid(
@@ -145,23 +132,14 @@ class PuzzleGUI:
             padx=20,
             pady=5
         )
-#The mouse controls for the puzzle image, allowing the user to select and move tiles 
 
-        self.puzzle_label.bind(
-            "<Button-1>",
-            self.left_click
-        )
-
-        self.puzzle_label.bind(
-            "<Button-3>",
-            self.right_click
-        )
-
+        self.puzzle_label.bind("<Button-1>", self.left_click)
+        self.puzzle_label.bind("<Button-3>", self.right_click)
         self.puzzle_label.bind(
             "<Shift-Button-1>",
             self.shift_left_click
-        ) 
-
+        )
+        
 #This part will let the user choose an image form thier computer and load it into the game 
     def choose_image(self):
         file_path = filedialog.askopenfilename(
