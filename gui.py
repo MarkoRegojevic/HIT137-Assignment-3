@@ -305,11 +305,20 @@ class PuzzleGUI:
             self.selected_tile = tile
             self.update_images()
             return
+        
         if self.selected_tile == tile:
             self.selected_tile = None
             self.update_images()
             return
-        
+
+        self.puzzle.swap_tiles(
+            self.selected_tile,
+            tile           
+        )
+
+        self.selected_tile = None
+        self.move_made()
+
         
 
 
