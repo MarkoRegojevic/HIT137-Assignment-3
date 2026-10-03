@@ -211,7 +211,7 @@ class PuzzleGUI:
             self.puzzle.create_tiles()
             self.puzzle.scramble()
 
-# resets everything for the new image
+#Resets everything for the new image
             self.moves = 0
             self.hints_used = 0
             self.selected_tile = None
@@ -229,4 +229,19 @@ class PuzzleGUI:
                 "There was a problem loading the image."
             )
 
-            
+#Updates both images shown on the screen
+    def update_images(self):
+
+        if self.puzzle is None:
+            return
+
+        original_image = self.puzzle.get_original_image()
+
+        puzzle_image = self.puzzle.get_display_image(
+            self.selected_tile
+        )
+
+        self.show_original_image(original_image)
+        self.show_puzzle_image(puzzle_image)
+
+
