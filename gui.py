@@ -407,165 +407,26 @@ class PuzzleGUI:
         self.update_images()
         self.update_score()
 
-#Updates both images shown on the screen
-    def update_images(self):
-
-        if self.puzzle is None:
-            return
-        original_image = self.puzzle.get_original_image()
-
-        puzzle_image = self.puzzle.get_display_image(
-            self.selected_tile
-        )
-        self.show_original_image(original_image)
-        self.show_puzzle_image(puzzle_image)
- #Shows the original image on the left
-    def show_original_image(self, image):
-        image = self.convert_image(image)
-        self.original_photo = ImageTk.PhotoImage(image)
-
-        self.original_image_label.config(
-            image=self.original_photo,
-            text=""
-        )
-#mShows the puzzle image on the right
-    def show_puzzle_image(self, image):
-
-        image = self.convert_image(image)
-
-        self.puzzle_photo = ImageTk.PhotoImage(image)
-
-        self.puzzle_label.config(
-            image=self.puzzle_photo,
-            text=""
-        )
-#Changes an opencv image so tkinter can display it
-    def convert_image(self, image):
-
-        image = self.image_processor.convert_to_rgb(image)
-
-        image = Image.fromarray(image)
-        return image 
 
     
-#Works out which tile was clicked 
-    def get_clicked_tile(self, event):
-        if self.puzzle is None:
-            return None
-        image_width = self.puzzle.get_width()
-        image_height = self.puzzle.get_height()
-        if event.x < 0 or event.y < 0:
-            return None
-
-        if event.x >= image_width or event.y >= image_height:
-            return None
-        tile_width = image_width // self.grid_size.get()
-        tile_height = image_height // self.grid_size.get()
-
-        column = event.x // tile_width
-        row = event.y // tile_height
-
-        return row, column
- #Left lcikc slects a title or swaps tiles 
-    def left_click(self, event):
-        if self.puzzle is None or self.game_finished:
-            return
-        tile = self.get_clicked_tile(event)
-        if tile is None:
-            return
-
-        if self.selected_tile is None:
-            self.selected_tile = tile
-            self.update_images()
-            return
-        
-        if self.selected_tile == tile:
-            self.selected_tile = None
-            self.update_images()
-            return
-        self.puzzle.swap_tiles(
-            self.selected_tile,
-            tile           
-        )
-        self.selected_tile = None
-        self.move_made()
-
-#Right click rotates a tile 
-    def right_click(self, event):
-        if self.puzzle is None or self.game_finished:
-            return
-        tile = self.get_clicked_tile(event)
-        if tile is None:
-            return
-
-        self.puzzle.rotate_tile(tile)
-        self.move_made() 
-
-#Shift and left clikc flips a tile 
-    def shift_left_click(self, event):
-        if self.puzzle is None or self.game_finished:
-            return
-        tile = self.get_clicked_tile(event)
-        if tile is None:
-            return
-        self.puzzle.flip_tile(tile)
-        self.move_made()
-
-#Runs after the user has made a move. 
-    def move_made(self): 
-        self.moves += 1 
-        self.puzzle.clear_hint()
-        self.update_images()
-        self.update_score()
-        self.check_finished() 
-
-    def update_score(self):
-        if self.puzzle is None:
-            self.tiles_left = 0
-
-        else: 
-            self.tiles_left = self.puzzle.count_incorrect_tiles()
-
-        self.moves_label.config(
-            text="Moves: " + str(self.moves)
-        )
-        self.tiles_label.config(
-            text="Tiles Incorrect: " + str(self.tiles_left)
-        )
-        self.hints_label.config(
-            text="Hints Used: " + str(self.hints_used) + " / 3" 
-        )
-#it will give the player a hint if they have not used all of their hints 
-    def use_hint(self):
-        if self.puzzle is None or self.game_finished:
-            return
-        if self.hints_used >= 3: 
-            self.hint_button.config(state="disabled") 
-            return
-        hint_found = self.puzzle.make_hint() 
-        if hint_found:
-            self.hints_used += 1
-            if self.hints_used >= 3:
-                self.hint_button.config(state="disabled")
-            self.update_images()
-            self.update_score() 
-
-        else: 
-            messagebox.showinfo(
-                "Hint",
-                "There are no incorrect tiles."
-            )
 #Solves the puzzle and ends the game 
     def solve_puzzle(self):
-
-        if self.puzzle is None:
+        if self.puzzle is None or self.game_finished:
             return
 
-        self.puzzle.solve_puzzle() 
+        self.puzzle.solve_puzzle()
 
         self.moves = 0
+
         self.selected_tile = None
+        self.hint_current = None
+        self.hint_home = None
+
         self.game_finished = True
+
+        self.hint_button.config(state="disabled")
+        self.solve_button.config(state="disabled")
+
         self.update_images()
         self.update_score()
 
