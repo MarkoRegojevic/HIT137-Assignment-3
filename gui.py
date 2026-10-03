@@ -415,3 +415,6 @@ class PuzzleGUI:
                 "Congratulations",
                 "You have solved the puzzle!"
             )
+#Activate the tinker program 
+    def run(self):
+        self.window.mainloop() 
