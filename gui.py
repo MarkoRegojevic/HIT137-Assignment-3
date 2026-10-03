@@ -261,52 +261,22 @@ class PuzzleGUI:
             self.puzzle_label,
             "puzzle"
         ) 
-#This will display 
-#If the cancel button is pressed 
-        if file_path == "":
-            return
-        try:
-            size = self.grid_size.get() 
+#This will display the selected image in tinker 
+    def show_image(self, image, label, image_type):
+        image = self.image_processor.convert_to_rgb(image)
+        image = Image.fromarray(image)
+        photo = ImageTk.PhotoImage(image)
 
-#Loads and prepares the image for the puzzle game 
-            image = self.image_processor.load_image(file_path)
+        label.config(
+            image=photo,
+            text=""
+        )
 
-            if image is None:
-                messagebox.showerror(
-                    "Error",
-                    "The image could not be loaded."
-                )
-                return
-            image = self.image_processor.resize_image(image) 
-            image = self.image_processor.prepare_grid(
-                image,
-                size
-            )
-#Makes a new puzzle 
-            self.puzzle = Puzzle(
-                image,
-                size,
-                self.image_processor
-            )
-            self.puzzle.create_tiles()
-            self.puzzle.scramble()
+        if image_type == "original":
+            self.original_photo = photo
+        else:
+            self.puzzle_photo = photo 
 
-#Resets everything for the new image
-            self.moves = 0
-            self.hints_used = 0
-            self.selected_tile = None
-            self.game_finished = False
-
-            self.hint_button.config(state="normal")
-            self.solve_button.config(state="normal") 
-            self.update_images()
-            self.update_score()
-        except Exception:
-
-            messagebox.showerror(
-                "Error",
-                "There was a problem loading the image."
-            )
 
 #Updates both images shown on the screen
     def update_images(self):
