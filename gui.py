@@ -139,18 +139,69 @@ class PuzzleGUI:
             "<Shift-Button-1>",
             self.shift_left_click
         )
-        
+
 #This part will let the user choose an image form thier computer and load it into the game 
     def choose_image(self):
         file_path = filedialog.askopenfilename(
             title="Choose an image",
             filetypes=[
-                ("Image files", "*.jpg *.jpeg *.png *.bmp"),
-                ("JPEG files", "*.jpg *.jpeg"),
-                ("PNG files", "*.png"),
-                ("BMP files", "*.bmp")
+                ("Image files", "*.jpg *.jpeg *.png *.bmp")
             ]
         )
+
+        if file_path == "":
+            return
+
+        try:
+            size = self.grid_size.get()
+
+            image = self.image_processor.prepare_image(
+                file_path,
+                size
+            )
+
+            self.original_image = image.copy()
+
+            tile_images = self.image_processor.split_image(
+                image,
+                size
+            )
+
+            tiles = []
+
+            for i in range(len(tile_images)):
+                tiles.append(
+                    Tile(tile_images[i], i, i)
+                )
+
+            self.puzzle = PuzzleBoard(size)
+            self.puzzle.load_tiles(tiles)
+            self.puzzle.scramble()
+
+            self.moves = 0
+            self.tiles_left = 0
+            self.hints_used = 0
+
+            self.selected_tile = None
+            self.hint_current = None
+            self.hint_home = None
+            self.game_finished = False
+
+            self.hint_button.config(state="normal")
+            self.solve_button.config(state="normal")
+
+            self.update_images()
+            self.update_score()
+
+        except Exception as error:
+            print(error)
+
+            messagebox.showerror(
+                "Error",
+                "There was a problem loading the image."
+            ) 
+
+    
 #If the cancel button is pressed 
         if file_path == "":
             return
