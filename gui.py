@@ -336,6 +336,76 @@ class PuzzleGUI:
         )
 
         self.move_made() 
+#flips tile horizontally when the shift button and left mouse button are pressed 
+    def shift_left_click(self, event):
+        if self.puzzle is None or self.game_finished:
+            return
+        tile = self.get_clicked_tile(event)
+        if tile is None:
+            return
+        self.puzzle.flip_tile(
+            self.tile_to_index(tile),
+            "h"
+        )
+        self.move_made()
+
+    def move_made(self):
+        self.moves = self.puzzle.move_count
+
+        self.hint_current = None
+        self.hint_home = None
+
+        self.update_images()
+        self.update_score()
+        self.check_finished()
+
+    def update_score(self):
+        if self.puzzle is None:
+            self.tiles_left = 0
+        else:
+            self.tiles_left = (
+                self.puzzle.get_incorrect_count()
+            )
+        self.moves_label.config(
+            text="Moves: " + str(self.moves)
+        )
+
+        self.tiles_label.config(
+            text="Tiles Incorrect: "
+            + str(self.tiles_left)
+        )
+
+        self.hints_label.config(
+            text="Hints Used: "
+            + str(self.hints_used)
+            + " / 3"
+        )
+
+#This section will give player a hint
+    def use_hint(self):
+        if self.puzzle is None or self.game_finished:
+            return
+        if self.hints_used >= 3:
+            self.hint_button.config(
+                state="disabled"
+            )
+            return
+        hint = self.puzzle.get_hint()
+        if hint is None:
+            messagebox.showinfo(
+                "Hint",
+                "There are no incorrect tiles."
+            )
+            return
+        self.hint_current = hint[0]
+        self.hint_home = hint[1]
+        self.hints_used += 1
+        if self.hints_used >= 3:
+            self.hint_button.config(
+                state="disabled"
+            )
+        self.update_images()
+        self.update_score()
 
 #Updates both images shown on the screen
     def update_images(self):
