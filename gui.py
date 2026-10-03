@@ -366,5 +366,25 @@ class PuzzleGUI:
             self.hints_label.config(
                 text="Hints Used: " + str(self.hints_used) + " / 3" 
             )
+#it will give the player a hint if they have not used all of their hints 
+    def use_hint(self):
+        if self.puzzle is None or self.game_finished:
+            return
+        if self.hints_used >= 3: 
+            self,hint_button.config(state="disabled") 
+            return
+        hint_found = self.puzzle.make_hint() 
+        if hint_found:
+            self.hints_used += 1
+            if self.hints_used >= 3:
+                self.hint_button.config(state="disabled")
+            self.update_images()
+            self.update_score() 
+
+        else: 
+            messagebox.showinfo(
+                "Hint",
+                "There are no incorrect tiles."
+            )
 
             
