@@ -145,7 +145,7 @@ def reassemble_image(self, tiles, grid_size):
                 + column
             )
 
-            row_titles.append(
+            row_tiles.append(
                 tiles[index]
             )
 
