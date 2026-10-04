@@ -225,39 +225,7 @@ def draw_grid(self, image, grid_size):
     return image
 
 
-# vertical grid lines
-for column in range(
-    1,
-    grid_size
-)
 
-    x = column * tile_width
-
-    cv2.line(
-        image_with_grid,
-        (x, 0),
-        (x, height),
-        (150, 150, 150),
-        1
-    )
-
-# horizontal grind lines
-for row in range(
-    1,
-    grid_size
-):
-
-    y = row * tile_height
-
-    cv2. line(
-        image_with_grid,
-        (0, y),
-        (width, y),
-        (150, 150, 150),
-        1
-    )
-
-return image_with_grid
 
 # convert openvc colours
 
