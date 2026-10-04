@@ -182,69 +182,18 @@ def rotate_tile(self, tile, angle):
 
     return tile.copy()
 
+# flips a tile
 
-# rotate tile 90 degrees clockwise
-# angle can be 0, 90, 180, 270
-
-def rotate_tile(
-        self,
-        tile,
-        angle
-):
-
-    if angle == 90:
-
-        rotated_tile = cv2.rotate(
-            tile,
-            cv2.ROTATE_90_CLOCKWISE
-        )
-
-    elif angle == 180:
-
-        rotated_tile == cv2.rotate(
-            tile,
-            cv2.ROTATE_180
-        )
-
-    elif angle == 270:
-
-        rotated_tile = cv2.rotate(
-            tile,
-            cv2.ROTATE_90_COUNTERCLOCKWISE
-        )
-
-    else:
-
-        rotated_tile = tile.copy()
-
-    return rotated_tile
-
-# flip a tile
-
-def flip_tile(
-        self,
-        tile,
-        direction
-):
+def flip_tile(self, tile, direction):
 
     if direction == "horizontal":
-
-        flipped_tile = cv2.flip(
-            tile,
-            1
-        )
+        return cv2.flip(tile, 1)
 
     elif direction == "vertical":
+        return cv2.flip(tile, 0)
 
-        flipped_tile = cv2.flip(
-            tile,
-            0
-        )
+    return tile.copy()
 
-    else:
-        flipped_tile = tile.copy()
-
-    return flipped_tile
 
 # draw grind lines on the image
 
