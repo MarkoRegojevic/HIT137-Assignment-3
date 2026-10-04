@@ -155,24 +155,33 @@ def reassemble_image(self, tiles, grid_size):
 
     return cv2.vconcat(rows)
 
-# swap two tiles in the list
+# rotates tiles 90 180 270 degrees
 
-def swap_titles(
-    self,
-    tiles,
-    first_index,
-    second_index
+def rotate_tile(self, tile, angle):
 
-):
+    if angle == 90:
 
-    temp = tiles[first_index]
-    
-    tiles[first_index] = \
-        tiles[second_index]
+        return cv2.rotate(
+            tile,
+            cv2.ROTATE_90_CLOCKWISE
+        )
 
-    tiles[second_index] = temp
+    elif angle == 180:
 
-    return tiles
+        return cv2.rotate(
+            tile,
+            cv2.ROTATE_180
+        )
+
+    elif angle == 270:
+
+        return cv2.rotate(
+            tile,
+            cv2.ROTATE_90_COUNTERCLOCKWISE
+        )
+
+    return tile.copy()
+
 
 # rotate tile 90 degrees clockwise
 # angle can be 0, 90, 180, 270
