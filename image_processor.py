@@ -81,10 +81,7 @@ def pad_image(self, image, grid_size):
 def prepare_image(self, file_path, grid_size):
 
     if grid_size not in [3, 4, 5]:
-        raise ValueError(
-            "Grid size must be 3, 4 or 5"
-
-        )
+        raise ValueError("Grid size must be 3, 4 or 5")
 
     image = self.load_image(
         file_path
@@ -101,22 +98,16 @@ def prepare_image(self, file_path, grid_size):
 
     return image
 
-# split the image into tiles
+# splits the image into tiles
 
 def split_image(self, image, grid_size):
 
     tiles=[]
 
-    height, width = image.shape[0:2]
+    height, width = image.shape[:2]
 
-    tile_height = (
-        height // grid_size
-    )
-
-    title_width = (
-        width // grid_size
-
-    )
+    tile_height = height // grid_size
+    title_width = width // grid_size
 
     for row in range(grid_size):
 
@@ -128,12 +119,12 @@ def split_image(self, image, grid_size):
             x1 = column * title_width
             x2 = x1 + title_width
 
-            title = image[
-                y1:y2
+            tile = image[
+                y1:y2,
                 x1:x2
             ].copy()
 
-            titles.append(title)
+            tiles.append(tile)
 
     return tiles
 
