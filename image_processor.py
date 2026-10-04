@@ -257,34 +257,34 @@ class ImageProcessor:
 
 # draw the hint circle
 
-def draw_circle(
-        self,
-        image,
-        index,
-        grid_size
-):
+    def draw_circle(
+            self,
+            image,
+            index,
+            grid_size
+    ):
 
-    height, width = image.shape[:2]
+        height, width = image.shape[:2]
 
-    tile_width = width // grid_size
-    tile_height = height // grid_size
+        tile_width = width // grid_size
+        tile_height = height // grid_size
 
-    row = index // grid_size
-    column = index % grid_size
+        row = index // grid_size
+        column = index % grid_size
 
-    centre = (
-        column * tile_width + tile_width // 2,
-        row * tile_height + tile_height // 2
+        centre = (
+            column * tile_width + tile_width // 2,
+            row * tile_height + tile_height // 2
 
-    )
+        )
 
-    cv2.circle(
-        image,
-        centre,
-        min(tile_width, tile_height) // 5,
-        (255, 0, 0),
-        3
-    )
+        cv2.circle(
+            image,
+            centre,
+            min(tile_width, tile_height) // 5,
+            (255, 0, 0),
+            3
+        )
 
 
 # convert openvc colours (rgb)
