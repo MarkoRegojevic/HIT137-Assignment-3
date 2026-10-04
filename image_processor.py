@@ -50,27 +50,23 @@ def resize_image(self, image):
 
 def pad_image(self, image, grid_size):
 
-    height, width = image. shape[0:2]
+    height, width = image. shape[:2]
 
     size = max(height, width)
 
-    remainder = size % grid_size
-
-    if remainder != 0:
-        size = size + (
-            grid_size - remainder
-        )
+    if size % grid_size != 0:
+        size += grid_size - (size % grid_size)
 
     extra_width = size - width
     extra_height = size - height
 
-    left=extra_width // 2
-    right=extra_width - left
+    left = extra_width // 2
+    right = extra_width - left
 
-    top=extra_height // 2
-    bottom=extra_height - top
+    top = extra_height // 2
+    bottom = extra_height - top
 
-    padded_image = cv2.copyMakeBorder(
+    return cv2.copyMakeBorder(
         image,
         top,
         bottom,
@@ -78,10 +74,7 @@ def pad_image(self, image, grid_size):
         right,
         cv2.BORDER_CONSTANT,
         value=(0, 0, 0)
-
     )
-
-    return padded_image 
 
 # load, resize and pad image from file
 
