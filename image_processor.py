@@ -20,12 +20,11 @@ class ImageProcessor:
 
         return image
     
-
-
+# resize image to fit within max_width and max_height while maintaining aspect ratio
 
 def resize_image(self, image):
 
-    height, width = image.shape[0:2]
+    height, width = image.shape[:2]
 
     width_scale = self.max_width / width
     height_scale = self.max_height / height
@@ -45,11 +44,9 @@ def resize_image(self, image):
         interpolation=cv2.INTER_AREA
     )
 
-    return resized_image
-
 
 # pads image so that the grid divides evenly
-# the image is maade square so rotated tiles still fit in the grid
+# the image is made square so rotated tiles still fit in the grid
 
 def pad_image(self, image, grid_size):
 
