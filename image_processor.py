@@ -19,7 +19,8 @@ class ImageProcessor:
             raise ValueError("Image could not be loaded. Please check the file path.")
 
         return image
-    
+
+
 # resize image to fit within max_width and max_height while maintaining aspect ratio
 
 def resize_image(self, image):
