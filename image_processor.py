@@ -127,7 +127,6 @@ def split_image(self, image, grid_size):
             title = image[
                 y1:y2
                 x1:x2
-
             ].copy()
 
             titles.append(title)
@@ -272,7 +271,8 @@ def draw_grid(
 
     tile_width =(
         height // grid_size
-    )
+    ) 
+    #Trying to make a change 
 
 # vertical grid lines
 for column in range(
