@@ -130,12 +130,7 @@ def split_image(self, image, grid_size):
 
 # reassemble tiles into one complete image
 
-def reassemble_image(
-        self,
-        titles,
-        grid_size
-    
-):
+def reassemble_image(self, tiles, grid_size):
 
     rows = []
 
@@ -151,22 +146,14 @@ def reassemble_image(
             )
 
             row_titles.append(
-                titles[index]
+                tiles[index]
             )
 
-        combined_row = cv2.hconcat(
-            row_tiles
-        )
-
         rows.append(
-            combined_row
+            cv2.hconcat(row_tiles)
         )
 
-    complete_image = cv2.vconcat(
-        rows
-    )
-
-    return complete_image
+    return cv2.vconcat(rows)
 
 # swap two tiles in the list
 
