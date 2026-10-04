@@ -5,12 +5,23 @@ import numpy as np
 class ImageProcessor:
 
     def __init__(self, max_width=500, max_height=500):
-        
+
         self.max_width = max_width
         self.max_height = max_height
 
 
 # load image from file
+    def load_image(self, file_path):
+
+        image = cv2.imread(file_path)
+
+        if image is None:
+            raise ValueError("Image could not be loaded. Please check the file path.")
+
+        return image
+    
+
+
 
 def resize_image(self, image):
 
