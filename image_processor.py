@@ -259,18 +259,12 @@ for row in range(
 
 return image_with_grid
 
-# convert opencv bgr image to rgb because opencv uses bgr by default
+# convert openvc colours
 
+def convert_to_rgb(self, image):
 
-def convert_to_rgb(
-        self,
-        image
-
-):
-
-    rgb_image = cv2.cvtColor(
+    return cv2.cvtColor(
         image,
         cv2.COLOR_BGR2RGB
-
     )
-    return rgb_image
+
