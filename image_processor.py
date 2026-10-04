@@ -218,7 +218,7 @@ def draw_grid(self, image, grid_size):
             image,
             (0, i*tile_height),
             (width, i*tile_height),
-            (180, 180, 180)
+            (180, 180, 180),
             1
         )
 
