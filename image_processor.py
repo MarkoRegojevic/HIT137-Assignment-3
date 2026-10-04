@@ -134,7 +134,7 @@ def reassemble_image(self, tiles, grid_size):
 
     rows = []
 
-    for row in range(grind_size):
+    for row in range(grid_size):
 
         row_titles = []
 
@@ -280,7 +280,7 @@ def draw_circle(
     )
 
     cv2.circle(
-        image
+        image,
         centre,
         min(tile_width, tile_height) // 5,
         (255, 0, 0),
