@@ -224,6 +224,38 @@ def draw_grid(self, image, grid_size):
 
     return image
 
+# draw coloured box around one tile
+
+def draw_tile_box(
+        self,
+        image,
+        index,
+        grid_size,
+        colour
+):
+
+        height, width = image.shape[:2]
+
+        tile_width = width // grid_size
+        tile_height = height // grid_size
+
+        row = index // grid_size
+        column = index % grid_size
+
+        x1 = column * tile_width
+        y1 = row * tile_height
+
+        x2 = x1 + tile_width - 1
+        y2 = y1 + tile_height - 1
+
+        cv2.rectangle(
+            image,
+            (x1, y1),
+            (x2, y2),
+            colour,
+            3
+        )
+
 
 
 
