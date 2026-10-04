@@ -1,11 +1,14 @@
-# gui for the image puzzle game 
+# gui for the image puzzle game
 
 import tkinter as tk
 from tkinter import filedialog
-from tkinter import messagebox 
+from tkinter import messagebox
 
-from PIL import Image, ImageTk 
-from image_processor import ImageProcessor  
+import cv2
+from PIL import Image, ImageTk
+
+from image_processor import ImageProcessor
+from puzzle import PuzzleBoard, Tile
 
 class PuzzleGUI:
     def __init__(self):
