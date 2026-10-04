@@ -309,7 +309,7 @@ for row in range(
 return image_with_grid
 
 # convert opencv bgr image to rgb because opencv uses bgr by default
-# change colour space from BGR to RGB
+
 
 def convert_to_rgb(
         self,
