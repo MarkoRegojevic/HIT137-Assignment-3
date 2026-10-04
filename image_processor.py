@@ -223,6 +223,7 @@ class ImageProcessor:
 
         return image
 
+
 # draw coloured box around one tile
 
     def draw_tile_box(
@@ -255,6 +256,7 @@ class ImageProcessor:
             3
         )
 
+
 # draw the hint circle
 
     def draw_circle(
@@ -274,6 +276,7 @@ class ImageProcessor:
 
         centre = (
             column * tile_width + tile_width // 2,
+<<<<<<< HEAD
             row * tile_height + tile_height // 2
 
         )
@@ -285,6 +288,19 @@ class ImageProcessor:
             (255, 0, 0),
             3
         )
+=======
+        row * tile_height + tile_height // 2
+        )
+
+        cv2.circle(
+            image,
+            centre,
+            min(tile_width, tile_height) // 5,
+            (255, 0, 0),
+            3
+        )
+
+>>>>>>> c4ceec03dc6bf01383169fc606731b16c7184084
 
 
 # convert openvc colours (rgb)
