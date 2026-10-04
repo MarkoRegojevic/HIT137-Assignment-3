@@ -197,22 +197,33 @@ def flip_tile(self, tile, direction):
 
 # draw grind lines on the image
 
-def draw_grid(
-        self,
-        image,
-        grid_size
+def draw_grid(self, image, grid_size):
 
-):
+    height, width = image.shape[:2]
 
-    image_with_grid = image.copy()
+    tile_width = width // grid_size
+    tile_height = height // grid_size
 
-    height, weight = \
-        image_with_grid.shape[0:2]
+    for i in range(1, grid_size):
 
-    tile_width =(
-        height // grid_size
-    ) 
-    #Trying to make a change 
+        cv2.line(
+            image,
+            (i*tile_width, 0),
+            (i*tile_width, height),
+            (180, 180, 180),
+            1
+        )
+
+        cv2.line(
+            image,
+            (0, i*tile_height),
+            (width, i*tile_height),
+            (180, 180, 180)
+            1
+        )
+
+    return image
+
 
 # vertical grid lines
 for column in range(
