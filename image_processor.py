@@ -223,6 +223,7 @@ class ImageProcessor:
 
         return image
 
+
 # draw coloured box around one tile
 
     def draw_tile_box(
@@ -255,6 +256,7 @@ class ImageProcessor:
             3
         )
 
+
 # draw the hint circle
 
     def draw_circle(
@@ -284,6 +286,7 @@ class ImageProcessor:
             (255, 0, 0),
             3
         )
+
 
 
 # convert openvc colours (rgb)
