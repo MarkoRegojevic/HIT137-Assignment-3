@@ -1,8 +1,11 @@
 import cv2
+import numpy as np
+
 
 class ImageProcessor:
 
-    def __init__(self, max_width=600, max_height=600):
+    def __init__(self, max_width=500, max_height=500):
+        
         self.max_width = max_width
         self.max_height = max_height
 
