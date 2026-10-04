@@ -136,7 +136,7 @@ def reassemble_image(self, tiles, grid_size):
 
     for row in range(grid_size):
 
-        row_titles = []
+        row_tiles = []
 
         for column in range(grid_size):
 
