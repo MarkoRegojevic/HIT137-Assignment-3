@@ -1,5 +1,4 @@
 #Image Puzzle Game
-
 #Gets the GUI class from the gui file
 from gui import PuzzleGUI
 

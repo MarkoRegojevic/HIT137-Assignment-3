@@ -8,8 +8,7 @@ class ImageProcessor:
         self.max_width = max_width
         self.max_height = max_height
 
-
-# load image from file
+#Load image from file
     def load_image(self, file_path):
 
         image = cv2.imread(file_path)
@@ -18,9 +17,6 @@ class ImageProcessor:
             raise ValueError("Image could not be loaded. Please check the file path.")
 
         return image
-
-
-# resize image to fit within max_width and max_height while maintaining aspect ratio
 
     def resize_image(self, image):
 
@@ -44,8 +40,7 @@ class ImageProcessor:
         interpolation=cv2.INTER_AREA
     )
 
-
-    # pads image so that the grid divides evenly
+#Pads image so that the grid divides evenly
 
     def pad_image(self, image, grid_size):
 
@@ -75,7 +70,7 @@ class ImageProcessor:
             value=(0, 0, 0)
         )
 
-# load, resize and pad image from file
+#Load, resize and pad image from file
 
     def prepare_image(self, file_path, grid_size):
 
@@ -97,7 +92,7 @@ class ImageProcessor:
 
         return image
 
-# splits the image into tiles
+#Splits the image into tiles
 
     def split_image(self, image, grid_size):
 
@@ -127,7 +122,7 @@ class ImageProcessor:
 
         return tiles
 
-# reassemble tiles into one complete image
+#Reassemble tiles into one complete image
 
     def reassemble_image(self, tiles, grid_size):
 
@@ -154,7 +149,7 @@ class ImageProcessor:
 
         return cv2.vconcat(rows)
 
-# rotates tiles 90 180 270 degrees
+#Rotates the tiles 90 180 270 degrees
 
     def rotate_tile(self, tile, angle):
 
@@ -181,7 +176,7 @@ class ImageProcessor:
 
         return tile.copy()
 
-# flips a tile
+#Flips a tile horizontally 
 
     def flip_tile(self, tile, direction):
 
@@ -193,8 +188,7 @@ class ImageProcessor:
 
         return tile.copy()
 
-
-# draw grind lines on the image
+#Draw grind lines on the image
 
     def draw_grid(self, image, grid_size):
 
@@ -223,8 +217,7 @@ class ImageProcessor:
 
         return image
 
-
-# draw coloured box around one tile
+#Draw coloured box around one tile when it is selected 
 
     def draw_tile_box(
         self,
@@ -256,8 +249,7 @@ class ImageProcessor:
             3
         )
 
-
-# draw the hint circle
+#This part will allow the hint circle to be drawn 
 
     def draw_circle(
             self,
@@ -288,8 +280,7 @@ class ImageProcessor:
             3
         )
 
-
-# convert openvc colours (rgb)
+#This will convert openvc colours
 
     def convert_to_rgb(self, image):
 
